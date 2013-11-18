@@ -12,8 +12,8 @@ After looking at POI in a bit more detail, I decided I would write my own compon
 
 The plan is to start with the very basics, then to add additional functionality as needed.
 
-To come
--------
+Still to come
+-------------
 
 - Dates returned correctly
 - asQueries() with good data
