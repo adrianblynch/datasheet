@@ -17,3 +17,4 @@ To come
 
 - Dates returned correctly
 - asQueries() with good data
+- asQueries() with messy data
