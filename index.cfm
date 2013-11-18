@@ -1,28 +1,21 @@
-
-<!--- <cfset fis = createObject("java", "java.io.FileInputStream").init(ExpandPath("data.xls"))>
-<cfset wb = createObject("java", "org.apache.poi.hssf.usermodel.HSSFWorkbook").init(fis)>
-<cfset sheet = wb.getSheetAt(1)>
-<cfset row = sheet.getRow(2)>
-<cfset cell = row.getCell(1)>
-
-<cfdump var="#cell.getStringCellValue()#">
-
-<cfdump var="#cell#">
-
-<cfabort> --->
-
 <cfoutput>
 
-<cfset xlsPath = ExpandPath("data.xls")>
-<cfset xlsURL = "http://localhost:8888/datasheet/data.xls">
-<cfset xlsPathNoExt = ExpandPath("an-xls-file")>
-<cfset xlsURLNoExt = "http://localhost:8888/datasheet/an-xls-file">
-<cfset xlsPathCrappy = ExpandPath("crappy-data.xls")>
+<h1>Usage</h1>
 
-<cfset xlsxPath = ExpandPath("data.xlsx")>
-<cfset xlsxURL = "http://localhost:8888/datasheet/data.xlsx">
-<cfset xlsxPathNoExt = ExpandPath("an-xlsx-file")>
-<cfset xlsxURLNoExt = "http://localhost:8888/datasheet/an-xlsx-file">
+<cfset version = CreateObject("java", "org.apache.poi.Version")>
+
+Using: #version.getProduct()# #version.getVersion()#
+
+<cfset xlsPath = ExpandPath("sample-files/data.xls")>
+<cfset xlsURL = "http://localhost:8888/datasheet/sample-files/data.xls">
+<cfset xlsPathNoExt = ExpandPath("sample-files/an-xls-file")>
+<cfset xlsURLNoExt = "http://localhost:8888/datasheet/sample-files/an-xls-file">
+<cfset xlsPathCrappy = ExpandPath("sample-files/crappy-data.xls")>
+
+<cfset xlsxPath = ExpandPath("sample-files/data.xlsx")>
+<cfset xlsxURL = "http://localhost:8888/datasheet/sample-files/data.xlsx">
+<cfset xlsxPathNoExt = ExpandPath("sample-files/an-xlsx-file")>
+<cfset xlsxURLNoExt = "http://localhost:8888/datasheet/sample-files/an-xlsx-file">
 
 <cfset ds = new Datasheet(path = xlsPath)>
 <cfset ds = new Datasheet(url = xlsURL)>

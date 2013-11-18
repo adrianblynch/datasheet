@@ -12,6 +12,11 @@ After looking at POI in a bit more detail, I decided I would write my own compon
 
 The plan is to start with the very basics, then to add additional functionality as needed.
 
+Environment
+-----------
+
+Built and tested on Railo 4.1.2.003, POI 3.8.
+
 Still to come
 -------------
 
