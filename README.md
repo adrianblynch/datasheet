@@ -1,5 +1,5 @@
-datasheet
-=========
+Datasheet.cfc
+=============
 
 Work with XLS files in Railo with POI
 
@@ -14,3 +14,6 @@ The plan is to start with the very basics, then to add additional functionality 
 
 To come
 -------
+
+- Dates returned correctly
+- asQueries() with good data
