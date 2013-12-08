@@ -20,7 +20,7 @@ Built and tested on Railo 4.1.2.003, POI 3.8.
 Coding style
 ------------
 
-As an experiment, Datasheet.cfc is a script based component with no use of semi-colons.
+As an experiment, Datasheet.cfc is a script based component with no use of semi-colons which makes use of Railo specific features.
 
 Why? To see how it feels to write script with no ; So far it feels great!
 
