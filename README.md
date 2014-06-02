@@ -22,7 +22,9 @@ Coding style
 
 As an experiment, Datasheet.cfc is a script based component with ~~no use of semi-colons which makes use of~~ Railo specific features.
 
-Why? To see how it feels to write script with no ; So far it feels great!
+~~Why? To see how it feels to write script with no ; So far it feels great!~~
+
+There are too many bugs in Railo when leaving semi-colons off the ends of statements so for now they'll be used.
 
 Still to come
 -------------
