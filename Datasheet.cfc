@@ -41,8 +41,39 @@ component {
 	function asArrays() localmode="modern" {
 
 		arrays = [];
+		sheets = this.workbook.iterator();
 
-		for (i = 1; i < this.workbook.getNumberOfSheets(); i++) {
+		while (sheets.hasNext()) {
+
+			sheet = sheets.next();
+			rows = sheet.rowIterator();
+			arrays.append([]);
+
+			while (rows.hasNext()) {
+
+				row = rows.next();
+				cells = row.cellIterator();
+
+				while (cells.hasNext()) {
+
+					cell = cells.next();
+
+					/* cell = row.getCell(k, row.CREATE_NULL_AS_BLANK);
+					arrays[i][j + 1][k + 1] = [];
+
+					if (!isNull(cell)) {
+						arrayAppend(arrays[i][j + 1][k + 1], getCellValue(cell));
+					} */
+					dump(getCellValue(cell));
+					//dump(cell);
+
+				}
+
+			}
+
+		}
+
+		/* for (i = 0; i < this.workbook.getNumberOfSheets(); i++) {
 
 			sheet = this.workbook.getSheetAt(i - 1);
 			arrays[i] = [];
@@ -69,7 +100,7 @@ component {
 
 			}
 
-		}
+		} */
 
 		return arrays
 
