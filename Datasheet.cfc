@@ -42,30 +42,32 @@ component {
 
 		arrays = [];
 		sheets = this.workbook.iterator();
+		sheetCount = 0;
 
 		while (sheets.hasNext()) {
 
 			sheet = sheets.next();
 			rows = sheet.rowIterator();
+
+			sheetCount++;
 			arrays.append([]);
+			rowCount = 0;
 
 			while (rows.hasNext()) {
 
 				row = rows.next();
 				cells = row.cellIterator();
 
+				rowCount++;
+				arrays[sheetCount].append([]);
+				cellCount = 0;
+
 				while (cells.hasNext()) {
 
 					cell = cells.next();
 
-					/* cell = row.getCell(k, row.CREATE_NULL_AS_BLANK);
-					arrays[i][j + 1][k + 1] = [];
-
-					if (!isNull(cell)) {
-						arrayAppend(arrays[i][j + 1][k + 1], getCellValue(cell));
-					} */
-					dump(getCellValue(cell));
-					//dump(cell);
+					cellCount++;
+					arrays[sheetCount][rowCount].append(getCellValue(cell));
 
 				}
 
