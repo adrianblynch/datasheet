@@ -1,22 +1,20 @@
 
 <cfscript>
 
-	version = CreateObject("java", "org.apache.poi.Version");
-	WriteOutput("<p>Using: #version.getProduct()# #version.getVersion()#</p>");
+	version = createObject("java", "org.apache.poi.Version");
+	writeOutput("<p>Using: #version.getProduct()# #version.getVersion()#</p>");
 
 	fileName = "sample-files/10-10001.xlsx";
 	//fileName = "sample-files/10-10001.xlsx";
 	//fileName = "sample-files/10-64001.xlsx";
 
-	debug = StructNew("linked");
-
-	xlsPath = ExpandPath(fileName);
+	xlsPath = expandPath(fileName);
 
 	ds = new Datasheet(path = xlsPath);
 
 	arrays = ds.asArrays();
 
-	WriteOutput("Read: #fileName#");
+	writeOutput("Read: #fileName#");
 
 </cfscript>
 

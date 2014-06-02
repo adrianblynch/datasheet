@@ -13,54 +13,54 @@ component {
 		*/
 
 		// Get the path or url ext
-		ext = !IsNull(arguments.path) ? ListLast(arguments.path, ".") : ListLast(arguments.url, ".")
+		ext = !isNull(arguments.path) ? listLast(arguments.path, ".") : listLast(arguments.url, ".");
 
 		// The extension determines the type of workbook class we use
-		this.workbookClass = ext EQ "xls" ? "org.apache.poi.hssf.usermodel.HSSFWorkbook" : "org.apache.poi.xssf.usermodel.XSSFWorkbook"
+		this.workbookClass = ext EQ "xls" ? "org.apache.poi.hssf.usermodel.HSSFWorkbook" : "org.apache.poi.xssf.usermodel.XSSFWorkbook";
 
 		// Get an input stream for the path or url file
-		if (!IsNull(arguments.path)) {
+		if (!isNull(arguments.path)) {
 			// TODO: Look at using File over FileInputStream as it consumes less memory: http://poi.apache.org/spreadsheet/quick-guide.html#FileInputStrea
-			this.inputStream = CreateObject("java", "java.io.FileInputStream").init(arguments.path)
-		} else if (IsDefined("arguments.url")) {
-			this.inputStream = CreateObject("java", "java.net.URL").init(arguments.url).openStream()
+			this.inputStream = createObject("java", "java.io.FileInputStream").init(arguments.path);
+		} else if (isDefined("arguments.url")) {
+			this.inputStream = createObject("java", "java.net.URL").init(arguments.url).openStream();
 		}
 
-		if (!IsNull(this.inputStream)) {
-			this.workbook = CreateObject("java", this.workbookClass).init(this.inputStream)
+		if (!isNull(this.inputStream)) {
+			this.workbook = createObject("java", this.workbookClass).init(this.inputStream);
 		} else {
-			this.workbook = CreateObject("java", this.workbookClass).init()
+			this.workbook = createObject("java", this.workbookClass).init();
 		}
 
-		variables.cell = CreateObject("java", "org.apache.poi.ss.usermodel.Cell")
+		variables.cell = createObject("java", "org.apache.poi.ss.usermodel.Cell");
 
-		return this
+		return this;
 
 	}
 
 	function asArrays() localmode="modern" {
 
-		arrays = []
+		arrays = [];
 
 		for (i = 1; i < this.workbook.getNumberOfSheets(); i++) {
 
-			sheet = this.workbook.getSheetAt(i - 1)
-			arrays[i] = []
+			sheet = this.workbook.getSheetAt(i - 1);
+			arrays[i] = [];
 
 			for (j = 0; j < sheet.getLastRowNum(); j++) {
 
-				row = sheet.getRow(j)
-				arrays[i][j + 1] = []
+				row = sheet.getRow(j);
+				arrays[i][j + 1] = [];
 
-				if (!IsNull(row)) {
+				if (!isNull(row)) {
 
 					for (k = 0; k < row.getLastCellNum() - 1; k++) {
 
-						cell = row.getCell(k, row.CREATE_NULL_AS_BLANK)
-						arrays[i][j + 1][k + 1] = []
+						cell = row.getCell(k, row.CREATE_NULL_AS_BLANK);
+						arrays[i][j + 1][k + 1] = [];
 
-						if (!IsNull(cell)) {
-							ArrayAppend(arrays[i][j + 1][k + 1], getCellValue(cell))
+						if (!isNull(cell)) {
+							arrayAppend(arrays[i][j + 1][k + 1], getCellValue(cell));
 						}
 
 					}
@@ -77,42 +77,48 @@ component {
 
 	function getCellValue(cell) localmode="modern" {
 
-		cellType = cell.getCellType()
+		cellType = cell.getCellType();
 
 		if (cellType EQ cell.CELL_TYPE_BLANK) {
-			value = ""
+			value = "";
 		} else if (cellType EQ cell.CELL_TYPE_ERROR) {
-			value = ""
+			value = "";
 		} else if (cellType EQ cell.CELL_TYPE_FORMULA) {
-			value = ""
+			value = "";
 		} else if (cellType EQ cell.CELL_TYPE_BOOLEAN) {
-			value = cell.getBooleanCellValue()
+			value = cell.getBooleanCellValue();
 		} else if (cellType EQ cell.CELL_TYPE_NUMERIC) {
-			value = cell.getNumericCellValue()
+			value = cell.getNumericCellValue();
 		} else if (cellType EQ cell.CELL_TYPE_STRING) {
-			value = cell.getStringCellValue()
+			value = cell.getStringCellValue();
 		}
 
-		return value
+		return value;
 
 	}
 
-	/* function toQueries(container = "array", firstRowAsHeader = "false") localmode="modern" {
+	/*function toQueries(container = "array", firstRowAsHeader = "false") localmode="modern" {
+
+
+		//	How to proceed:
+		//	- If firstRowAsHeader
+		//		- The first row dictates which columns we parse
+
 
 		//
 		//	@container - The type of container to return sheet data in
 		//	@firstRowAsHeader - Should the first row be treated as headers
 		//
 
-		i = 0
-		sheetsStruct = StructNew("linked")
-		sheetsArray = []
-		name = ""
+		i = 0;
+		sheetsStruct = structNew("linked");
+		sheetsArray = [];
+		name = "";
 
-		variables.workbook = CreateObject("java", "#variables.poiPackage#.xssf.usermodel.XSSFWorkbook").init(inputStream)
+		variables.workbook = createObject("java", "#variables.poiPackage#.xssf.usermodel.XSSFWorkbook").init(inputStream);
 
 		for (i = 0; i < variables.workbook.getNumberOfSheets() - 1; i++)
-			ArrayAppend(sheetsArray, sheetToQuery(variables.workbook.getSheetAt(i)))
+			arrayAppend(sheetsArray, sheetToQuery(variables.workbook.getSheetAt(i)));
 		}
 
 		// DELETE? - To get the structure to maintain sheet order, we add them to the array above and then loop backwards adding to the structure as we go
@@ -120,16 +126,16 @@ component {
 		if ((arguments.container) EQ "struct") {
 
 			for (i = 1; i < ArrayLen(sheetsArray); i++) {
-				name = variables.workbook.getSheetAt(i - 1).getSheetName()
-				sheetsStruct[name] = sheetsArray[i]
+				name = variables.workbook.getSheetAt(i - 1).getSheetName();
+				sheetsStruct[name] = sheetsArray[i];
 			}
 
-			return sheetsStruct
+			return sheetsStruct;
 
 		}
 
-		return sheetsArray
+		return sheetsArray;
 
-	} */
+	}*/
 
 }
