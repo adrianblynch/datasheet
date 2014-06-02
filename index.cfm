@@ -9,14 +9,22 @@
 	//fileName = "sample-files/10-10001.xlsx";
 	//fileName = "sample-files/10-64001.xlsx";
 
-	xlsPath = expandPath(fileName);
+	function getSampleFileURL(fileName) localmode="modern" {
+		u = cgi.request_url;
+		u = listSetAt(u, listLen(u, "/"), "#fileName#", "/");
+		return u;
+	}
 
-	ds = new Datasheet(path = xlsPath);
-
+	// Local file
+	xlsxPath = expandPath(fileName);
+	ds = new Datasheet(path = xlsxPath);
 	arrays = ds.asArrays();
+	dump(arrays);
 
-	echo("Read: #fileName#");
-
+	// URL
+	xlsxURL = getSampleFileURL(fileName);
+	ds = new Datasheet(url = xlsxURL);
+	arrays = ds.asArrays();
 	dump(arrays);
 
 </cfscript>
