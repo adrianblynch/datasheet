@@ -12,24 +12,11 @@
 
 	xlsPath = ExpandPath(fileName);
 
-	debug.initStart = GetTickCount();
-
 	ds = new Datasheet(path = xlsPath);
-
-	debug.initEnd = GetTickCount();
-
-	debug.asArraysStart = GetTickCount();
 
 	arrays = ds.asArrays();
 
-	debug.asArraysEnd = GetTickCount();
-
 	WriteOutput("Read: #fileName#");
-
-	debug.initTotal = debug.initEnd - debug.initStart;
-	debug.asArraysTotal = debug.asArraysEnd - debug.asArraysStart;
-
-	dump(debug);
 
 </cfscript>
 
