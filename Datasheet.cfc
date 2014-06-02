@@ -75,35 +75,6 @@ component {
 
 		}
 
-		/* for (i = 0; i < this.workbook.getNumberOfSheets(); i++) {
-
-			sheet = this.workbook.getSheetAt(i - 1);
-			arrays[i] = [];
-
-			for (j = 0; j < sheet.getLastRowNum(); j++) {
-
-				row = sheet.getRow(j);
-				arrays[i][j + 1] = [];
-
-				if (!isNull(row)) {
-
-					for (k = 0; k < row.getLastCellNum() - 1; k++) {
-
-						cell = row.getCell(k, row.CREATE_NULL_AS_BLANK);
-						arrays[i][j + 1][k + 1] = [];
-
-						if (!isNull(cell)) {
-							arrayAppend(arrays[i][j + 1][k + 1], getCellValue(cell));
-						}
-
-					}
-
-				}
-
-			}
-
-		} */
-
 		return arrays
 
 	}
@@ -129,46 +100,5 @@ component {
 		return value;
 
 	}
-
-	/*function toQueries(container = "array", firstRowAsHeader = "false") localmode="modern" {
-
-
-		//	How to proceed:
-		//	- If firstRowAsHeader
-		//		- The first row dictates which columns we parse
-
-
-		//
-		//	@container - The type of container to return sheet data in
-		//	@firstRowAsHeader - Should the first row be treated as headers
-		//
-
-		i = 0;
-		sheetsStruct = structNew("linked");
-		sheetsArray = [];
-		name = "";
-
-		variables.workbook = createObject("java", "#variables.poiPackage#.xssf.usermodel.XSSFWorkbook").init(inputStream);
-
-		for (i = 0; i < variables.workbook.getNumberOfSheets() - 1; i++)
-			arrayAppend(sheetsArray, sheetToQuery(variables.workbook.getSheetAt(i)));
-		}
-
-		// DELETE? - To get the structure to maintain sheet order, we add them to the array above and then loop backwards adding to the structure as we go
-
-		if ((arguments.container) EQ "struct") {
-
-			for (i = 1; i < ArrayLen(sheetsArray); i++) {
-				name = variables.workbook.getSheetAt(i - 1).getSheetName();
-				sheetsStruct[name] = sheetsArray[i];
-			}
-
-			return sheetsStruct;
-
-		}
-
-		return sheetsArray;
-
-	}*/
 
 }
