@@ -4,9 +4,9 @@
 	version = CreateObject("java", "org.apache.poi.Version")
 	WriteOutput("<p>Using: #version.getProduct()# #version.getVersion()#</p>")
 
-	fileName = "sample-file/10-10001.xlsx"
-	//fileName = "sample-file/10-10001.xlsx"
-	//fileName = "sample-file/10-64001.xlsx"
+	fileName = "sample-files/10-10001.xlsx"
+	//fileName = "sample-files/10-10001.xlsx"
+	//fileName = "sample-files/10-64001.xlsx"
 
 	debug = StructNew("linked")
 
