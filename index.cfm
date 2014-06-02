@@ -2,9 +2,10 @@
 <cfscript>
 
 	version = createObject("java", "org.apache.poi.Version");
-	writeOutput("<p>Using: #version.getProduct()# #version.getVersion()#</p>");
+	echo("<p>Using: #version.getProduct()# #version.getVersion()#</p>");
 
-	fileName = "sample-files/10-10001.xlsx";
+	fileName = "sample-files/10-11.xlsx";
+	//fileName = "sample-files/10-10001.xlsx";
 	//fileName = "sample-files/10-10001.xlsx";
 	//fileName = "sample-files/10-64001.xlsx";
 
@@ -14,7 +15,9 @@
 
 	arrays = ds.asArrays();
 
-	writeOutput("Read: #fileName#");
+	echo("Read: #fileName#");
+
+	dump(arrays);
 
 </cfscript>
 
