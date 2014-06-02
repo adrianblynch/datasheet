@@ -1,35 +1,35 @@
 
 <cfscript>
 
-	version = CreateObject("java", "org.apache.poi.Version")
-	WriteOutput("<p>Using: #version.getProduct()# #version.getVersion()#</p>")
+	version = CreateObject("java", "org.apache.poi.Version");
+	WriteOutput("<p>Using: #version.getProduct()# #version.getVersion()#</p>");
 
-	fileName = "sample-files/10-10001.xlsx"
-	//fileName = "sample-files/10-10001.xlsx"
-	//fileName = "sample-files/10-64001.xlsx"
+	fileName = "sample-files/10-10001.xlsx";
+	//fileName = "sample-files/10-10001.xlsx";
+	//fileName = "sample-files/10-64001.xlsx";
 
-	debug = StructNew("linked")
+	debug = StructNew("linked");
 
-	xlsPath = ExpandPath(fileName)
+	xlsPath = ExpandPath(fileName);
 
-	debug.initStart = GetTickCount()
+	debug.initStart = GetTickCount();
 
-	ds = new Datasheet(path = xlsPath)
+	ds = new Datasheet(path = xlsPath);
 
-	debug.initEnd = GetTickCount()
+	debug.initEnd = GetTickCount();
 
-	debug.asArraysStart = GetTickCount()
+	debug.asArraysStart = GetTickCount();
 
-	arrays = ds.asArrays()
+	arrays = ds.asArrays();
 
-	debug.asArraysEnd = GetTickCount()
+	debug.asArraysEnd = GetTickCount();
 
-	WriteOutput("Read: #fileName#")
+	WriteOutput("Read: #fileName#");
 
-	debug.initTotal = debug.initEnd - debug.initStart
-	debug.asArraysTotal = debug.asArraysEnd - debug.asArraysStart
+	debug.initTotal = debug.initEnd - debug.initStart;
+	debug.asArraysTotal = debug.asArraysEnd - debug.asArraysStart;
 
-	dump(debug)
+	dump(debug);
 
 </cfscript>
 
