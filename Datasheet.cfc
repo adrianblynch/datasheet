@@ -16,20 +16,20 @@ component {
 		ext = !isNull(arguments.path) ? listLast(arguments.path, ".") : listLast(arguments.url, ".");
 
 		// The extension determines the type of workbook class we use
-		this.workbookClass = ext EQ "xls" ? "org.apache.poi.hssf.usermodel.HSSFWorkbook" : "org.apache.poi.xssf.usermodel.XSSFWorkbook";
+		workbookClass = ext EQ "xls" ? "org.apache.poi.hssf.usermodel.HSSFWorkbook" : "org.apache.poi.xssf.usermodel.XSSFWorkbook";
 
 		// Get an input stream for the path or url file
 		if (!isNull(arguments.path)) {
 			// TODO: Look at using File over FileInputStream as it consumes less memory: http://poi.apache.org/spreadsheet/quick-guide.html#FileInputStrea
-			this.inputStream = createObject("java", "java.io.FileInputStream").init(arguments.path);
+			inputStream = createObject("java", "java.io.FileInputStream").init(arguments.path);
 		} else if (isDefined("arguments.url")) {
-			this.inputStream = createObject("java", "java.net.URL").init(arguments.url).openStream();
+			inputStream = createObject("java", "java.net.URL").init(arguments.url).openStream();
 		}
 
-		if (!isNull(this.inputStream)) {
-			this.workbook = createObject("java", this.workbookClass).init(this.inputStream);
+		if (!isNull(inputStream)) {
+			variables.workbook = createObject("java", workbookClass).init(inputStream);
 		} else {
-			this.workbook = createObject("java", this.workbookClass).init();
+			variables.workbook = createObject("java", workbookClass).init();
 		}
 
 		variables.cell = createObject("java", "org.apache.poi.ss.usermodel.Cell");
@@ -41,7 +41,7 @@ component {
 	function asArrays() localmode="modern" {
 
 		arrays = [];
-		sheets = this.workbook.iterator();
+		sheets = workbook.iterator();
 		sheetCount = 0;
 
 		while (sheets.hasNext()) {
