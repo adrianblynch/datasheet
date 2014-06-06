@@ -26,6 +26,36 @@ As an experiment, Datasheet.cfc is a script based component with ~~no use of sem
 
 There are too many bugs in Railo when leaving semi-colons off the ends of statements so for now they'll be used.
 
+Notes
+-----
+
+The change in asArrays() from nested for loops to iterators was supposed to clean things up. It worked a little but not as much as I would have liked.
+
+Going from:
+
+	for (i) {
+		for (j) {
+			for (k) {
+
+			}
+		}
+	}
+
+to:
+
+	while (sheets) {
+		while (rows) {
+			while (cells) {
+			}
+		}
+	}
+
+made the loops clearer, but then the population of the arrays still needed a current index:
+
+	arrays[sheetCount][rowCount].append(getCellValue(cell));
+
+Not as pretty as it could have been.
+
 Still to come
 -------------
 
