@@ -36,7 +36,7 @@ Going from:
 	for (i) {
 		for (j) {
 			for (k) {
-
+				// Access cell here
 			}
 		}
 	}
@@ -46,6 +46,7 @@ to:
 	while (sheets) {
 		while (rows) {
 			while (cells) {
+				// Access cell here
 			}
 		}
 	}
