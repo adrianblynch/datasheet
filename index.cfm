@@ -30,14 +30,26 @@
 
 	// Create an XLS and XLSX file using WorkbookFactory
 
-	fileName = "sample-files/XSSFWorkbook.xlsx";
-	xlsxDS = new Datasheet(path = expandPath(fileName));
-	data = xlsxDS.asArrays();
+	/* fileName = "sample-files/XSSFWorkbook.xlsx";
+	ds = new Datasheet(path = expandPath(fileName));
+	data = ds.asArrays();
+	dump(data); */
+
+	/* fileName = "sample-files/HSSFWorkbook.xls";
+	ds = new Datasheet(path = expandPath(fileName));
+	data = ds.asArrays();
+	dump(data); */
+
+	// Point to extension-less files
+
+	fileName = "sample-files/an-xls-file";
+	ds = new Datasheet(path = expandPath(fileName));
+	data = ds.asArrays();
 	dump(data);
 
-	fileName = "sample-files/HSSFWorkbook.xls";
-	xlsDS = new Datasheet(path = expandPath(fileName));
-	data = xlsDS.asArrays();
+	fileName = "sample-files/an-xlsx-file";
+	ds = new Datasheet(path = expandPath(fileName));
+	data = ds.asArrays();
 	dump(data);
 
 </cfscript>

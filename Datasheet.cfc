@@ -44,10 +44,8 @@ component {
 		//sheets = workbook.iterator();
 		sheetCount = 0;
 
-		//while (sheets.hasNext()) {
 		for (i = 1; i LTE workbook.getNumberOfSheets(); i++) {
 
-			//sheet = sheets.next();
 			sheet = workbook.getSheetAt(i - 1);
 			rows = sheet.rowIterator();
 
