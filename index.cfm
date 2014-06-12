@@ -5,7 +5,7 @@
 	echo("<p>Using: #version.getProduct()# #version.getVersion()#</p>");
 
 	//fileName = "sample-files/crappy-data.xls";
-	//fileName = "sample-files/10-11.xlsx";
+	fileName = "sample-files/10-11.xlsx";
 	//fileName = "sample-files/10-10001.xlsx";
 	//fileName = "sample-files/10-10001.xlsx";
 	//fileName = "sample-files/10-64001.xlsx";

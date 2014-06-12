@@ -41,33 +41,30 @@ component {
 	function asArrays() localmode="modern" {
 
 		arrays = [];
-		//sheets = workbook.iterator();
 		sheetCount = 0;
 
-		for (i = 1; i LTE workbook.getNumberOfSheets(); i++) {
+		for (i = 1; i <= workbook.getNumberOfSheets(); i++) {
 
 			sheet = workbook.getSheetAt(i - 1);
-			rows = sheet.rowIterator();
+			arrays[i] = [];
 
-			sheetCount++;
-			arrays.append([]);
-			rowCount = 0;
+			for (j = 0; j < sheet.getLastRowNum(); j++) {
 
-			while (rows.hasNext()) {
+				row = sheet.getRow(j);
+				arrays[i][j + 1] = [];
 
-				row = rows.next();
-				cells = row.cellIterator();
+				if (!isNull(row)) {
 
-				rowCount++;
-				arrays[sheetCount].append([]);
-				cellCount = 0;
+					for (k = 0; k < row.getLastCellNum() - 1; k++) {
 
-				while (cells.hasNext()) {
+						cell = row.getCell(k, row.CREATE_NULL_AS_BLANK);
+						arrays[i][j + 1][k + 1] = [];
 
-					cell = cells.next();
+						if (!isNull(cell)) {
+							arrayAppend(arrays[i][j + 1][k + 1], getCellValue(cell));
+						}
 
-					cellCount++;
-					arrays[sheetCount][rowCount].append(getCellValue(cell));
+					}
 
 				}
 
@@ -82,7 +79,7 @@ component {
 	function asQueries(firstRowAsHeaders = false) {
 
 		arrays = asArrays();
-		dump(arrays);
+		//dump(arrays);
 		queries = [];
 
 	}
