@@ -27,7 +27,7 @@ component {
 		}
 
 		if (!isNull(inputStream)) {
-			variables.workbook = createObject("java", workbookClass).init(inputStream);
+			variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create(inputStream);
 		} else {
 			variables.workbook = createObject("java", workbookClass).init();
 		}
@@ -41,12 +41,14 @@ component {
 	function asArrays() localmode="modern" {
 
 		arrays = [];
-		sheets = workbook.iterator();
+		//sheets = workbook.iterator();
 		sheetCount = 0;
 
-		while (sheets.hasNext()) {
+		//while (sheets.hasNext()) {
+		for (i = 1; i LTE workbook.getNumberOfSheets(); i++) {
 
-			sheet = sheets.next();
+			//sheet = sheets.next();
+			sheet = workbook.getSheetAt(i - 1);
 			rows = sheet.rowIterator();
 
 			sheetCount++;
@@ -76,6 +78,14 @@ component {
 		}
 
 		return arrays
+
+	}
+
+	function asQueries(firstRowAsHeaders = false) {
+
+		arrays = asArrays();
+		dump(arrays);
+		queries = [];
 
 	}
 
