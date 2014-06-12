@@ -42,12 +42,19 @@
 
 	// Point to extension-less files
 
-	fileName = "sample-files/an-xls-file";
+	/* fileName = "sample-files/an-xls-file";
 	ds = new Datasheet(path = expandPath(fileName));
 	data = ds.asArrays();
-	dump(data);
+	dump(data); */
 
-	fileName = "sample-files/an-xlsx-file";
+	/* fileName = "sample-files/an-xlsx-file";
+	ds = new Datasheet(path = expandPath(fileName));
+	data = ds.asArrays();
+	dump(data); */
+
+	// See how crappy data is read
+
+	fileName = "sample-files/crappy-data.xls";
 	ds = new Datasheet(path = expandPath(fileName));
 	data = ds.asArrays();
 	dump(data);
