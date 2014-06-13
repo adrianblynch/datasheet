@@ -5,7 +5,7 @@
 	echo("<p>Using: #version.getProduct()# #version.getVersion()#</p>");
 
 	//fileName = "sample-files/crappy-data.xls";
-	fileName = "sample-files/10-11.xlsx";
+	//fileName = "sample-files/10-11.xlsx";
 	//fileName = "sample-files/10-10001.xlsx";
 	//fileName = "sample-files/10-10001.xlsx";
 	//fileName = "sample-files/10-64001.xlsx";
@@ -15,6 +15,12 @@
 		u = listSetAt(u, listLen(u, "/"), "#fileName#", "/");
 		return u;
 	}
+
+	// Normal data - No cheeky stuff!
+	fileName = "sample-files/1-sheet-normal-data.xlsx";
+	ds = new Datasheet(path = expandPath(fileName));
+	data = ds.asArrays();
+	dump(data);
 
 	// Local file
 	/* xlsxPath = expandPath(fileName);
@@ -54,9 +60,9 @@
 
 	// See how crappy data is read
 
-	fileName = "sample-files/crappy-data.xls";
+	/* fileName = "sample-files/crappy-data.xls";
 	ds = new Datasheet(path = expandPath(fileName));
 	data = ds.asArrays();
-	dump(data);
+	dump(data); */
 
 </cfscript>

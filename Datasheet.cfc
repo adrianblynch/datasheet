@@ -29,7 +29,7 @@ component {
 		if (!isNull(inputStream)) {
 			variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create(inputStream);
 		} else {
-			variables.workbook = createObject("java", workbookClass).init();
+			variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create();
 		}
 
 		variables.cell = createObject("java", "org.apache.poi.ss.usermodel.Cell");
@@ -43,28 +43,31 @@ component {
 		arrays = [];
 		sheetCount = 0;
 
-		for (i = 1; i <= workbook.getNumberOfSheets(); i++) {
+		for (i = 1; i LTE workbook.getNumberOfSheets(); i++) {
 
+			//sheet = sheets.next();
 			sheet = workbook.getSheetAt(i - 1);
-			arrays[i] = [];
+			rows = sheet.rowIterator();
 
-			for (j = 0; j < sheet.getLastRowNum(); j++) {
+			sheetCount++;
+			arrays.append([]);
+			rowCount = 0;
 
-				row = sheet.getRow(j);
-				arrays[i][j + 1] = [];
+			while (rows.hasNext()) {
 
-				if (!isNull(row)) {
+				row = rows.next();
+				cells = row.cellIterator();
 
-					for (k = 0; k < row.getLastCellNum() - 1; k++) {
+				rowCount++;
+				arrays[sheetCount].append([]);
+				cellCount = 0;
 
-						cell = row.getCell(k, row.CREATE_NULL_AS_BLANK);
-						arrays[i][j + 1][k + 1] = [];
+				while (cells.hasNext()) {
 
-						if (!isNull(cell)) {
-							arrayAppend(arrays[i][j + 1][k + 1], getCellValue(cell));
-						}
+					cell = cells.next();
 
-					}
+					cellCount++;
+					arrays[sheetCount][rowCount].append(getCellValue(cell));
 
 				}
 
