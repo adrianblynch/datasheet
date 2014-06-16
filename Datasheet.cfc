@@ -5,11 +5,12 @@ component {
 		Author: Adrian Lynch - www.adrianlynch.co.uk
 	*/
 
-	function init(path, url) localmode="modern" {
+	function init(path, url, cellPolicy = "RETURN_NULL_AND_BLANK") localmode="modern" {
 
 		/*
 			@path - The path to an xls(x) file
 			@url - The url to an xls(x) file
+			@cellPolicy - Any valid policy from Row - RETURN_NULL_AND_BLANK, RETURN_BLANK_AS_NULL, CREATE_NULL_AS_BLANK - Not fully implemented - Null cells returned as null
 		*/
 
 		if (!isNull(arguments.path)) {
@@ -26,12 +27,69 @@ component {
 		}
 
 		variables.cell = createObject("java", "org.apache.poi.ss.usermodel.Cell");
+		variables.cellPolicy = arguments.cellPolicy;
 
 		return this;
 
 	}
 
 	function asArrays() localmode="modern" {
+
+		arrays = [];
+
+		for (i = 1; i <= workbook.getNumberOfSheets(); i++) {
+
+			sheet = workbook.getSheetAt(i - 1);
+			arrays.append([]);
+			highestCellIndex = getHighestCellIndex(sheet);
+
+			for (j = 0; j <= sheet.getLastRowNum(); j++) {
+
+				row = sheet.getRow(j);
+				arrays[i].append([]);
+
+				//if (!IsNull(row)) {
+
+					/*
+						BUG: https://issues.apache.org/bugzilla/show_bug.cgi?id=30635
+						Row.getLastCellNum() can report the wrong number.
+						The first thought of checking for null might not work when we
+						want to deal with nulls.
+					*/
+
+					for (k = 0; k <= highestCellIndex; k++) {
+
+						cell = row.getCell(k, row[cellPolicy]);
+						arrays[i][j + 1].append(getCellValue(cell));
+
+					}
+
+				//}
+
+			}
+
+		}
+
+		return arrays
+
+	}
+
+	function getHighestCellIndex(sheet) {
+		// To include null data when cells are skipped, get the highest cell index.
+
+		rows = sheet.rowIterator();
+		highestIndex = 0;
+
+		while (rows.hasNext()) {
+			row = rows.next();
+			highestIndex = max(highestIndex, row.getLastCellNum() - 1); // See comment about bug above in asArrays()
+		}
+
+		return highestIndex;
+
+	}
+
+	/* function asArrays() localmode="modern" {
 
 		arrays = [];
 		sheetCount = 0;
@@ -69,7 +127,7 @@ component {
 
 		return arrays
 
-	}
+	} */
 
 	function asQueries(firstRowAsHeaders = false) {
 
@@ -80,6 +138,10 @@ component {
 	}
 
 	function getCellValue(cell) localmode="modern" {
+
+		if (isNull(cell)) {
+			return null;
+		}
 
 		cellType = cell.getCellType();
 
