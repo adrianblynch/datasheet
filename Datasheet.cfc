@@ -48,23 +48,24 @@ component {
 				row = sheet.getRow(j);
 				arrays[i].append([]);
 
-				//if (!IsNull(row)) {
 
-					/*
-						BUG: https://issues.apache.org/bugzilla/show_bug.cgi?id=30635
-						Row.getLastCellNum() can report the wrong number.
-						The first thought of checking for null might not work when we
-						want to deal with nulls.
-					*/
+				/*
+					BUG: https://issues.apache.org/bugzilla/show_bug.cgi?id=30635
+					Row.getLastCellNum() can report the wrong number.
+					The first thought of checking for null might not work when we
+					want to deal with nulls.
+				*/
 
-					for (k = 0; k <= highestCellIndex; k++) {
+				for (k = 0; k <= highestCellIndex; k++) {
 
+					if (!isNull(row)) {
 						cell = row.getCell(k, row[cellPolicy]);
 						arrays[i][j + 1].append(getCellValue(cell));
-
+					} else {
+						arrays[i][j + 1].append(null);
 					}
 
-				//}
+				}
 
 			}
 
@@ -75,9 +76,10 @@ component {
 	}
 
 	function getHighestCellIndex(sheet) {
+
 		// To include null data when cells are skipped, get the highest cell index.
 
-		rows = sheet.rowIterator();
+		rows = sheet.rowIterator(); // Excludes null rows - Which is OK
 		highestIndex = 0;
 
 		while (rows.hasNext()) {

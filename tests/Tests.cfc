@@ -6,7 +6,7 @@ component {
 	};
 
 	function setup() {
-		variables.expectedRegularData = [
+		variables.expectedData = [
 			[
 				["A1", "B1", "C1"],
 				["A2", "B2", "C2"],
@@ -16,6 +16,11 @@ component {
 				["A1", null, null],
 				[null, "B2", null],
 				[null, null, "C3"]
+			],
+			[
+				["Row 1"],
+				[null],
+				["Row 3"]
 			]
 		];
 		return this;
@@ -28,8 +33,8 @@ component {
 			ds = getNewDS(file);
 			result = ds.asArrays();
 
-			assert(result[1][1][1] EQ expectedRegularData[1][1][1], "Cell one in row one in sheet one in #file# is wrong", getFunctionCalledName());
-			assert(result[1][3][3] EQ expectedRegularData[1][3][3], "Cell three in row three in sheet one in #file# is wrong", getFunctionCalledName());
+			assert(result[1][1][1] EQ expectedData[1][1][1], "Cell one in row one in sheet one in #file# is wrong", getFunctionCalledName());
+			assert(result[1][3][3] EQ expectedData[1][3][3], "Cell three in row three in sheet one in #file# is wrong", getFunctionCalledName());
 
 		}
 
@@ -45,6 +50,20 @@ component {
 			result = ds.asArrays();
 
 			assert(result[2][1][2] EQ null, "Cell two in row one in sheet 2 in #file# is not null", getFunctionCalledName());
+
+		}
+
+	}
+
+	function testMissingRowsAsArrays() {
+
+		for (file in ["data.xlsx"]) {
+
+			ds = getNewDS(file);
+			result = ds.asArrays();
+
+			assert(result[3][1][1] EQ expectedData[3][1][1], "Cell one in row one in sheet 3 in #file# is wrong", getFunctionCalledName());
+			assert(result[3][2][1] EQ expectedData[3][2][1], "Cell one in row two in sheet 3 in #file# is wrong", getFunctionCalledName());
 
 		}
 
