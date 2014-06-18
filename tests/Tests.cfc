@@ -18,9 +18,9 @@ component {
 				[null, null, "C3"]
 			],
 			[
-				["Row 1"],
-				[null],
-				["Row 3"]
+				["A1", "B1", "C1"],
+				[null, null, null],
+				["A3", "B3", "C3"]
 			]
 		];
 		return this;
@@ -57,7 +57,7 @@ component {
 
 	function testMissingRowsAsArrays() {
 
-		for (file in ["data.xlsx"]) {
+		for (file in ["data.xlsx", "data.xls"]) {
 
 			ds = getNewDS(file);
 			result = ds.asArrays();
