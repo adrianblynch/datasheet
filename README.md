@@ -15,7 +15,7 @@ The plan is to start with the very basics, then to add additional functionality 
 Environment
 -----------
 
-Built and tested on Railo 4.1.2.003, POI 3.8.
+Built on Railo 4.1.2.003 and 4.2.1.000 with POI 3.8.
 
 Coding style
 ------------
@@ -57,9 +57,9 @@ made the loops clearer, but then the population of the arrays still needed a cur
 
 Not as pretty as it could have been.
 
+A change to using WorkbookFactory to remove the need to care about XLS vs XLSX meant the iterators couldn't be used anyway. Plus empty rows and cells were being ignored which mean data was misaligned.
+
 Still to come
 -------------
 
-- Dates returned correctly
-- asQueries() with good data
-- asQueries() with messy data
+- asQueries() with complete data (no empty cells or rows) and incomplete data.
