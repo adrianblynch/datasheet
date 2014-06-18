@@ -31,6 +31,15 @@ component {
 
 	}
 
+	function testMissingCellsXLSXAsArrays() {
+
+		ds = getNewDS();
+		result = ds.asArrays();
+
+		assert(result[2][1][2] EQ null, "Cell two in row one in sheet 2 is not null", getFunctionCalledName());
+
+	}
+
 	function getNewDS(path = "data.xlsx") {
 		return createObject("../Datasheet").init(path = expandPath(path));
 	}

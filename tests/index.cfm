@@ -5,7 +5,7 @@
 	fails = [];
 
 	tests = [
-		new DatasheetTests()
+		new Tests()
 	];
 
 	for (test in tests) {
