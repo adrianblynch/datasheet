@@ -21,22 +21,32 @@ component {
 		return this;
 	}
 
-	function testRegularXLSXDataAsArrays() {
+	function testRegularDataAsArrays() {
 
-		ds = getNewDS();
-		result = ds.asArrays();
+		for (file in ["data.xlsx", "data.xls"]) {
 
-		assert(result[1][1][1] EQ expectedRegularData[1][1][1], "Cell one in row one in sheet one is wrong", getFunctionCalledName());
-		assert(result[1][3][3] EQ expectedRegularData[1][3][3], "Cell three in row three in sheet one is wrong", getFunctionCalledName());
+			ds = getNewDS(file);
+			result = ds.asArrays();
+
+			assert(result[1][1][1] EQ expectedRegularData[1][1][1], "Cell one in row one in sheet one in #file# is wrong", getFunctionCalledName());
+			assert(result[1][3][3] EQ expectedRegularData[1][3][3], "Cell three in row three in sheet one in #file# is wrong", getFunctionCalledName());
+
+		}
+
+
 
 	}
 
-	function testMissingCellsXLSXAsArrays() {
+	function testMissingCellsAsArrays() {
 
-		ds = getNewDS();
-		result = ds.asArrays();
+		for (file in ["data.xlsx", "data.xls"]) {
 
-		assert(result[2][1][2] EQ null, "Cell two in row one in sheet 2 is not null", getFunctionCalledName());
+			ds = getNewDS(file);
+			result = ds.asArrays();
+
+			assert(result[2][1][2] EQ null, "Cell two in row one in sheet 2 in #file# is not null", getFunctionCalledName());
+
+		}
 
 	}
 
