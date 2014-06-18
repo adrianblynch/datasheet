@@ -99,18 +99,18 @@ component {
 
 		cellType = cell.getCellType();
 
-		if (cellType EQ cell.CELL_TYPE_BLANK) {
+		if (cellType EQ cell.CELL_TYPE_NUMERIC) {
+			value = cell.getNumericCellValue();
+		} else if (cellType EQ cell.CELL_TYPE_STRING) {
+			value = cell.getStringCellValue();
+		} else if (cellType EQ cell.CELL_TYPE_BOOLEAN) {
+			value = cell.getBooleanCellValue();
+		} else if (cellType EQ cell.CELL_TYPE_BLANK) {
 			value = "";
 		} else if (cellType EQ cell.CELL_TYPE_ERROR) {
 			value = "";
 		} else if (cellType EQ cell.CELL_TYPE_FORMULA) {
 			value = "";
-		} else if (cellType EQ cell.CELL_TYPE_BOOLEAN) {
-			value = cell.getBooleanCellValue();
-		} else if (cellType EQ cell.CELL_TYPE_NUMERIC) {
-			value = cell.getNumericCellValue();
-		} else if (cellType EQ cell.CELL_TYPE_STRING) {
-			value = cell.getStringCellValue();
 		}
 
 		return value;
