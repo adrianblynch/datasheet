@@ -91,54 +91,6 @@ component {
 
 	}
 
-	/* function asArrays() localmode="modern" {
-
-		arrays = [];
-		sheetCount = 0;
-
-		for (i = 1; i LTE workbook.getNumberOfSheets(); i++) {
-
-			sheet = workbook.getSheetAt(i - 1);
-			rows = sheet.rowIterator();
-
-			sheetCount++;
-			arrays.append([]);
-			rowCount = 0;
-
-			while (rows.hasNext()) {
-
-				row = rows.next();
-				cells = row.cellIterator();
-
-				rowCount++;
-				arrays[sheetCount].append([]);
-				cellCount = 0;
-
-				while (cells.hasNext()) {
-
-					cell = cells.next();
-
-					cellCount++;
-					arrays[sheetCount][rowCount].append(getCellValue(cell));
-
-				}
-
-			}
-
-		}
-
-		return arrays
-
-	} */
-
-	function asQueries(firstRowAsHeaders = false) {
-
-		arrays = asArrays();
-		//dump(arrays);
-		queries = [];
-
-	}
-
 	function getCellValue(cell) localmode="modern" {
 
 		if (isNull(cell)) {
