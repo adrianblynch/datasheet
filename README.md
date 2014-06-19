@@ -63,3 +63,4 @@ Still to come
 -------------
 
 - asQueries() with complete data (no empty cells or rows) and incomplete data.
+- Possible use of Cell.getColumnIndex() and Cell.getRowIndex() to reduce the number of loops we do when parsing the cells.
