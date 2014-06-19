@@ -43,6 +43,7 @@ component {
 			sheet = workbook.getSheetAt(i - 1);
 			arrays.append([]);
 			highestCellIndex = getHighestCellIndex(sheet);
+			dump(highestCellIndex);
 
 			for (j = 0; j <= sheet.getLastRowNum(); j++) {
 
