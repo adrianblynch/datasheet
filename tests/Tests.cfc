@@ -69,8 +69,31 @@ component {
 
 	}
 
+	function testGetCellValue() {
+
+		cell = new Cell();
+		numericCell = new Cell(cell.CELL_TYPE_NUMERIC);
+		stringCell = new Cell(cell.CELL_TYPE_STRING);
+		booleanCell = new Cell(cell.CELL_TYPE_BOOLEAN);
+		blankCell = new Cell(cell.CELL_TYPE_BLANK);
+		errorCell = new Cell(cell.CELL_TYPE_ERROR);
+		formulaCell = new Cell(cell.CELL_TYPE_FORMULA);
+
+		ds = getNewDS();
+		assert(ds.getCellValue(numericCell) EQ 123, "Numeric cell value incorrect", getFunctionCalledName());
+		assert(ds.getCellValue(stringCell) EQ "abc", "String cell value incorrect", getFunctionCalledName());
+		assert(ds.getCellValue(booleanCell) EQ true, "Boolean cell value incorrect", getFunctionCalledName());
+		assert(ds.getCellValue(blankCell) EQ "", "Blank cell value incorrect", getFunctionCalledName());
+		assert(ds.getCellValue(errorCell) EQ "", "Error cell value incorrect", getFunctionCalledName());
+		assert(ds.getCellValue(formulaCell) EQ "", "Formula cell value incorrect", getFunctionCalledName());
+
+	}
+
 	function getNewDS(path = "data.xlsx") {
-		return createObject("../Datasheet").init(path = expandPath(path));
+		if (!isNull(path)) {
+			path = expandPath(path);
+		}
+		return createObject("../Datasheet").init(path = path);
 	}
 
 	function run(tests = [], abortOnFail = false) {

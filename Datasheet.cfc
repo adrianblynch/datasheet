@@ -23,6 +23,7 @@ component {
 		if (!isNull(inputStream)) {
 			variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create(inputStream);
 		} else {
+			// FAILS: No create() method in WorkbookFactory
 			variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create();
 		}
 
