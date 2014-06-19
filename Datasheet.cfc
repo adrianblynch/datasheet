@@ -23,7 +23,7 @@ component {
 		if (!isNull(inputStream)) {
 			variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create(inputStream);
 		} else {
-			// FAILS: No create() method in WorkbookFactory
+			// FAILS: No create() method in WorkbookFactory - Which class should we create here? Maybe init() is the wrong place to determine if we're reading or writing?
 			variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create();
 		}
 
@@ -43,7 +43,6 @@ component {
 			sheet = workbook.getSheetAt(i - 1);
 			arrays.append([]);
 			highestCellIndex = getHighestCellIndex(sheet);
-			dump(highestCellIndex);
 
 			for (j = 0; j <= sheet.getLastRowNum(); j++) {
 
