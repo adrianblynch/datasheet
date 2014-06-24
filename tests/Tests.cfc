@@ -6,6 +6,7 @@ component {
 	};
 
 	function setup() {
+
 		variables.expectedData = [
 			[
 				["A1", "B1", "C1"],
@@ -21,8 +22,19 @@ component {
 				["A1", "B1", "C1"],
 				[null, null, null],
 				["A3", "B3", "C3"]
+			],
+			[
+				["", "", ""],
+				["", "", ""],
+				["", "", ""]
 			]
 		];
+
+		return this;
+
+	}
+
+	function tearDown() {
 		return this;
 	}
 
@@ -37,8 +49,6 @@ component {
 			assert(result[1][3][3] EQ expectedData[1][3][3], "Cell three in row three in sheet one in #file# is wrong", getFunctionCalledName());
 
 		}
-
-
 
 	}
 
@@ -64,6 +74,23 @@ component {
 
 			assert(result[3][1][1] EQ expectedData[3][1][1], "Cell one in row one in sheet 3 in #file# is wrong", getFunctionCalledName());
 			assert(result[3][2][1] EQ expectedData[3][2][1], "Cell one in row two in sheet 3 in #file# is wrong", getFunctionCalledName());
+
+		}
+
+	}
+
+	function testBlankCellsAsArrays() {
+
+		for (file in ["data.xlsx"]) {
+
+			ds = getNewDS(file);
+			result = ds.asArrays();
+
+			// assert(result[3][1][1] EQ expectedData[3][1][1], "Cell one in row one in sheet 3 in #file# is wrong", getFunctionCalledName());
+			// assert(result[3][2][1] EQ expectedData[3][2][1], "Cell one in row two in sheet 3 in #file# is wrong", getFunctionCalledName());
+			assert(result[4][1][1] EQ expectedData[4][1][1], "Cell one in row one in sheet 4 in #file# is wrong");
+			dump(result[4]);
+			assert(result[4][3][3] EQ expectedData[4][3][3], "Cell three in row three in sheet 4 in #file# is wrong");
 
 		}
 
@@ -110,6 +137,7 @@ component {
 		}
 
 		for (method in methodsToRun) {
+			setup();
 			variables[method]();
 		}
 
