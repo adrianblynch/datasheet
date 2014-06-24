@@ -21,14 +21,8 @@ component {
 			throw "No input file specified. Please supply either a path or a URL to an XLS(X) file.";
 		}
 
-		if (!isNull(inputStream)) {
-			variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create(inputStream);
-		} else {
-			// FAILS: No create() method in WorkbookFactory - Which class should we create here? Maybe init() is the wrong place to determine if we're reading or writing?
-			variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create();
-		}
-
-		variables.cell = createObject("java", "org.apache.poi.ss.usermodel.Cell");
+		variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create(inputStream);
+		variables.Cell = createObject("java", "org.apache.poi.ss.usermodel.Cell");
 		variables.cellPolicy = "RETURN_NULL_AND_BLANK";
 
 		return this;
