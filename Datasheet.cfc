@@ -22,7 +22,6 @@ component {
 		}
 
 		variables.workbook = createObject("java", "org.apache.poi.ss.usermodel.WorkbookFactory").create(inputStream);
-		variables.Cell = createObject("java", "org.apache.poi.ss.usermodel.Cell");
 		variables.cellPolicy = "RETURN_NULL_AND_BLANK";
 
 		return this;
