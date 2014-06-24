@@ -17,6 +17,8 @@ component {
 			inputStream = createObject("java", "java.io.FileInputStream").init(arguments.path);
 		} else if (!isNull(arguments.url)) {
 			inputStream = createObject("java", "java.net.URL").init(arguments.url).openStream();
+		} else {
+			throw "No input file specified. Please supply either a path or a URL to an XLS(X) file.";
 		}
 
 		if (!isNull(inputStream)) {
