@@ -5,12 +5,11 @@ component {
 		Author: Adrian Lynch - www.adrianlynch.co.uk
 	*/
 
-	function init(path, url, cellPolicy = "RETURN_NULL_AND_BLANK") localmode="modern" {
+	function init(path, url) localmode="modern" {
 
 		/*
 			@path - The path to an xls(x) file
 			@url - The url to an xls(x) file
-			@cellPolicy - Any valid policy from Row - RETURN_NULL_AND_BLANK, RETURN_BLANK_AS_NULL, CREATE_NULL_AS_BLANK - Not fully implemented - Null cells returned as null
 		*/
 
 		if (!isNull(arguments.path)) {
@@ -28,7 +27,7 @@ component {
 		}
 
 		variables.cell = createObject("java", "org.apache.poi.ss.usermodel.Cell");
-		variables.cellPolicy = arguments.cellPolicy;
+		variables.cellPolicy = "RETURN_NULL_AND_BLANK";
 
 		return this;
 
