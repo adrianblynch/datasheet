@@ -38,6 +38,7 @@ component {
 
 		arrays = [];
 
+		i = 1;
 		for (i = 1; i <= workbook.getNumberOfSheets(); i++) {
 
 			sheet = workbook.getSheetAt(i - 1);
@@ -57,6 +58,7 @@ component {
 					want to deal with nulls.
 				*/
 
+				// Why does this loop run once, putting a null cell in when it shouldn't - Maybe
 				for (k = 0; k <= highestCellIndex; k++) {
 
 					if (!isNull(row)) {
@@ -76,7 +78,7 @@ component {
 
 	}
 
-	function getHighestCellIndex(sheet) {
+	function getHighestCellIndex(sheet) localmode="modern" {
 
 		// To include null data when cells are skipped, get the highest cell index.
 
