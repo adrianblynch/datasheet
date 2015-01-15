@@ -57,7 +57,7 @@ made the loops clearer, but then the population of the arrays still needed a cur
 
 Not as pretty as it could have been.
 
-A change to using WorkbookFactory to remove the need to care about XLS vs XLSX meant the iterators couldn't be used anyway. Plus empty rows and cells were being ignored which mean data was misaligned.
+A change to using WorkbookFactory to remove the need to care about XLS vs XLSX meant the iterators couldn't be used anyway. Plus empty rows and cells were being ignored which meant data was misaligned.
 
 Still to come
 -------------
